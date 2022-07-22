@@ -3,6 +3,7 @@ import {
     getDatapackName,
     getGlobalRewardFileName,
     getTypeRewardFileName,
+    getNamedRewardFileName,
     DATAPACK_FOLDER_PATH,
     RESOURCEPACK_FOLDER_PATH,
     writeStringFile
@@ -14,6 +15,7 @@ import { config } from "../config.ts"
 export default async function generatesFunctionFiles() {
     const promises: Promise<void>[] = []
     types.forEach((type) => promises.push(generateFunctionFile(type)))
+    promises.push(generateNamedFunctionFile())
     promises.push(generateRewards())
     promises.push(generateLoadFiles())
     promises.push(generatePackMeta())
@@ -23,6 +25,7 @@ export default async function generatesFunctionFiles() {
 async function generateRewards() {
     await writeStringFile(`${getDatapackFunctionPath()}/${getGlobalRewardFileName()}.mcfunction`, config.globalRewardCommands.join('\n').trim())
     await writeStringFile(`${getDatapackFunctionPath()}/${getTypeRewardFileName()}.mcfunction`, config.typeRewardCommands.join('\n').trim())
+    await writeStringFile(`${getDatapackFunctionPath()}/${getNamedRewardFileName()}.mcfunction`, config.namedRewardCommands.join('\n').trim())
 }
 
 async function generatePackMeta() {
@@ -55,6 +58,13 @@ async function generateFunctionFile(type: string) {
             bodyColor: bodyColor
         }) + "\n"
     }
+
+    await writeStringFile(path, content.trim())
+}
+
+async function generateNamedFunctionFile() {
+    const content =  `advancement grant @s only ${getDatapackName()}:named/active`
+    const path = `${getDatapackFunctionPath()}/named.mcfunction`
 
     await writeStringFile(path, content.trim())
 }

@@ -13,6 +13,7 @@ export async function generateFolders() {
             promises.push(ensureDir(path))
         }
     }
+    promises.push(ensureDir(getAdvancementsPathType('named'))) //, ensureDir(getPredicatesPath()))
     promises.push(ensureDir(getMinecraftFunctionPath()), ensureDir(getDatapackFunctionPath()))
 
     for (const type of types) {
@@ -57,6 +58,10 @@ export function getAdvancementsPath() {
     return `${DATAPACK_FOLDER_PATH}/data/${getDatapackName()}/advancements`
 }
 
+export function getPredicatesPath() {
+    return `${DATAPACK_FOLDER_PATH}/data/${getDatapackName()}/predicates`
+}
+
 export function getAdvancementsPathType(type: string) {
     return `${getAdvancementsPath()}/${type}`
 }
@@ -71,4 +76,8 @@ export function getGlobalRewardFileName() {
 
 export function getTypeRewardFileName() {
     return "type_reward"
+}
+
+export function getNamedRewardFileName() {
+    return "named_reward"
 }

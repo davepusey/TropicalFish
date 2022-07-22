@@ -19,6 +19,8 @@ async function generateZIP(path: string, output: string) {
     for await (const dirEntry of Deno.readDir(path)) {
         fileNames.push(path + "/" + dirEntry.name)
     }
+    // console.log(fileNames, `${config.i18nName.replace(/ /g, '')}-${output}.zip`, { overwrite: true })
+    // todo; see if possible to fix, currently zips too much and includes the {output} directory rather than just the contents
     await compress(fileNames, `${config.i18nName.replace(/ /g, '')}-${output}.zip`, { overwrite: true })
 }
 

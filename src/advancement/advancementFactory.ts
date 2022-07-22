@@ -1,5 +1,6 @@
 import { getDatapackName, getGlobalRewardFileName, getTypeRewardFileName } from "../utils/pack.ts"
 import { Criteria, Display } from "./IJson.ts"
+import { namedVariants, namedVariantMapping } from "../utils/variant.ts"
 
 class AdvancementFactory {
 
@@ -51,6 +52,20 @@ export function getActiveFileContent(params: {
         .get()
 }
 
+// todo update for named
+export function getNamedActiveFileContent(params: {
+    name: string
+}) {
+    return new AdvancementFactory()
+        .parent(`named/${params.name}`)
+        .criteria({
+            active: {
+                trigger: "minecraft:impossible"
+            }
+        })
+        .get()
+}
+
 export function getGlobaleFileContent() {
     return new AdvancementFactory()
         .criteria({})
@@ -79,6 +94,7 @@ export function getGlobalTypeFileContent(params: {
     parent: string,
     type: string
 }) {
+    // consider updating to handle reward for 'named'
     return new AdvancementFactory()
         .criteria({})
         .display({
@@ -149,7 +165,7 @@ export function getBodyFileContent(params: {
 }) {
     const variants = params.variantsColor.map(variantColor => {
         return {
-            [`variant_${variantColor.color}`]: {
+            [`${variantColor.key}`]: {
                 trigger: "minecraft:inventory_changed",
                 conditions: {
                     items: [{
@@ -202,8 +218,11 @@ export function getPatternFileContent(params: {
     modelData: number,
     parent: string,
     patternColor: string,
-    type: string
+    type: string,
+    variantCode: number
 }) {
+    let showToast = true
+    if (params.type == 'named') {showToast = false}
     return new AdvancementFactory()
         .criteria({})
         .display({
@@ -214,7 +233,7 @@ export function getPatternFileContent(params: {
             title: {
                 translate: "advancement.catch.type_bodyColor_patternColor.title",
                 with: [{
-                    translate: `fish.type.${params.type}`
+                    translate: `fish.type.${namedVariants.includes(params.variantCode) ? params.variantCode : params.type}`
                 }, {
                     translate: `fish.color.${params.bodyColor}`
                 }, {
@@ -224,7 +243,7 @@ export function getPatternFileContent(params: {
             description: {
                 translate: "advancement.catch.type_bodyColor_patternColor.description",
                 with: [{
-                    translate: `fish.type.${params.type}`
+                    translate: `fish.type.${namedVariants.includes(params.variantCode) ? params.variantCode : params.type}`
                 }, {
                     translate: `fish.color.${params.bodyColor}`
                 }, {
@@ -233,7 +252,7 @@ export function getPatternFileContent(params: {
             },
             background: "minecraft:textures/block/tube_coral_block.png",
             frame: "task",
-            show_toast: true,
+            show_toast: showToast,
             announce_to_chat: false,
             hidden: false
         })
