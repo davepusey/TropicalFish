@@ -1,1 +1,7 @@
 Thumbs.db
+data-pack/data/tropicalfish/function/check_bucket.mcfunction
+data-pack/data/tropicalfish/advancement/all.json
+data-pack/data/tropicalfish/advancement/*/
+src/.vs/
+src/bin/
+src/obj/

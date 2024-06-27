@@ -1,0 +1,14 @@
+advancement revoke @s from tropicalfish:all
+advancement revoke @s from tropicalfish:named
+advancement revoke @s from tropicalfish:betty
+advancement revoke @s from tropicalfish:blockfish
+advancement revoke @s from tropicalfish:brinely
+advancement revoke @s from tropicalfish:clayfish
+advancement revoke @s from tropicalfish:dasher
+advancement revoke @s from tropicalfish:flopper
+advancement revoke @s from tropicalfish:glitter
+advancement revoke @s from tropicalfish:kob
+advancement revoke @s from tropicalfish:snooper
+advancement revoke @s from tropicalfish:spotty
+advancement revoke @s from tropicalfish:stripey
+advancement revoke @s from tropicalfish:sunstreak

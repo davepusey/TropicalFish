@@ -1,0 +1,27 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:observer"
+		},
+		"title": "Check Bucket",
+		"description": "Used to trigger the check_bucket function",
+		"show_toast": false,
+		"announce_to_chat": false,
+		"hidden": true
+	},
+	"criteria": {
+		"inventory_changed": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:tropical_fish_bucket"
+					}
+				]
+			}
+		}
+	},
+	"rewards": {
+		"function": "tropicalfish:check_bucket"
+	}
+}
