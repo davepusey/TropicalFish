@@ -1,6 +1,1 @@
-.vscode/
-.idea/
-datapack/
-resourcepack/
-bucket-project/dist/
-*.zip
+Thumbs.db
