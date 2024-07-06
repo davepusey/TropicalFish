@@ -1,6 +1,7 @@
 {
-  "pack": {
-    "description": "Tropical Fish Resourcepack",
-    "pack_format": 18
-  }
+	"pack":
+	{
+		"pack_format": 34,
+		"description": "Tropical Fish"
+	}
 }
